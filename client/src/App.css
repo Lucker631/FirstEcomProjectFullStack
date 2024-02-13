@@ -1,3 +1,37 @@
-.App {
-  text-align: center;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+.nav{
+  list-style: none;
+  background-color: black;
+  height: 13vh;
+  color: white;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.nav a {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: auto;
+  margin-top: 2rem;
+  border: 1px solid black;
+  padding: 2rem;
+  border-radius: 6px;
+}
+form button{
+  margin-top: 1rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  border: none;
+  background-color: blue;
+  color: white;
 }
