@@ -63,11 +63,32 @@ form button{
 .category-div ul {
   list-style: none;
 }
-.hometext {
+.home-text {
   text-align: center;
   gap: 10px; 
   margin-top: 20px;
   border: 1px solid black;
   border-radius: 6px;
   padding: 2rem;
+  width: 70%
+}
+.header-text{
+  color: green;
+}
+.home{
+align-items: center;
+justify-content: center;
+
+}
+.home-img{
+  width: 40%;
+}
+.grid-home {
+width: 100%;
+display: grid;
+grid-template-columns: 1fr 1fr;
+border: 1px solid black;
+padding: 2rem;
+border-radius: 6px;
+place-items: center;
 }

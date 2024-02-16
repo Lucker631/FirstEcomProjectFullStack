@@ -41,7 +41,7 @@ const SecretPage = ({ user }) => {
           ...category,
           products: productsResponse.data.data,
         };
-        console.log(productsResponse.data.data);
+
         updatedCategories.push(categoryWithProducts);
       } catch (error) {
         console.error("Error fetching products for category:", error);
