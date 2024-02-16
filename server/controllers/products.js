@@ -90,7 +90,7 @@ const product_show = async (req, res) => {
         category: category,
       });
       if (foundCat) {
-        const foundProduct = await Products.findOne({});
+        const foundProduct = await Products.find({});
         res.send({
           ok: true,
           data: foundProduct,

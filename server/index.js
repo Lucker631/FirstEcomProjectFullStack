@@ -33,7 +33,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 require("dotenv").config();
 const port = process.env.PORT || 5050;
-
+app.use(require("cors")());
 const mongoose = require("mongoose");
 
 mongoose.set("debug", true);
@@ -79,7 +79,7 @@ app.use(admin.options.rootPath, router);
 // end ADMINJS
 app.use("/category", require("./routes/categories"));
 app.use("/product", require("./routes/products"));
-// app.use("/user", require("./routes/users"));
+app.use("/users", require("./routes/users.routes"));
 // end ADMINJS
 
 app.listen(port, () => console.log(`Serv is running at ${port}`));

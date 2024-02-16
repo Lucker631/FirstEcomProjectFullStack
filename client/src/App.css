@@ -34,4 +34,32 @@ form button{
   border: none;
   background-color: blue;
   color: white;
+  cursor: pointer;
+}
+.product-image {
+  width: 100px;
+}
+.product-card {
+  grid-template-columns: 2fr 2fr 2fr 2fr 2fr ;
+  display: grid;
+  gap: 10px; 
+  margin-top: 20px;
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 2rem;
+ 
+}
+.category-div{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+  margin-top: 2rem;
+  border: 1px solid black;
+  padding: 2rem;
+  border-radius: 6px;
+}
+.category-div ul {
+  list-style: none;
 }
