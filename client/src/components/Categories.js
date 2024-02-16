@@ -82,7 +82,21 @@ function Categories() {
   );
   return (
     <div>
+      <h2>Cart</h2>
+      <ul>
+        {cart.map((item) => (
+          <li key={item._id}>
+            <p>
+              {item.name} - Quantity: {item.quantity}
+            </p>
+            <button onClick={() => removeFromCart(item._id)}>Remove One</button>
+          </li>
+        ))}
+      </ul>
+      <p>Total Price: ${totalPrice.toFixed(2)}</p>
+      <button>Finish shopping and proceed</button>
       <h1>Categories</h1>
+
       {categories ? (
         <div>
           {categories.map((category) => (
@@ -126,18 +140,6 @@ function Categories() {
       ) : (
         <h1>No categories</h1>
       )}
-      <h2>Cart</h2>
-      <ul>
-        {cart.map((item) => (
-          <li key={item._id}>
-            <p>
-              {item.name} - Quantity: {item.quantity}
-            </p>
-            <button onClick={() => removeFromCart(item._id)}>Remove One</button>
-          </li>
-        ))}
-      </ul>
-      <p>Total Price: ${totalPrice.toFixed(2)}</p>
     </div>
   );
 }
