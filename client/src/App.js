@@ -17,6 +17,9 @@ import Register from "./pages/Register.js";
 import SecretPage from "./pages/SecretPage.js";
 import { URL } from "./config";
 import * as jose from "jose";
+import PaymentSuccess from "./pages/payment_success";
+import PaymentError from "./pages/payment_error";
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [user, setUser] = useState(null);
@@ -24,7 +27,7 @@ function App() {
   useEffect(() => {
     const verify_token = async () => {
       try {
-        debugger;
+        // debugger;
         if (!token) {
           setIsLoggedIn(false);
         } else {
@@ -75,7 +78,8 @@ function App() {
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/trackOrder" element={<TrackOrder />} />
-
+          <Route path="/payment/success" element={<PaymentSuccess />} />
+          <Route path="/payment/error" element={<PaymentError />} />
           <Route
             path="/login"
             element={

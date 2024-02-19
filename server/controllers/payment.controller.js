@@ -4,17 +4,17 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const create_checkout_session = async (req, res) => {
   try {
     // 4. getting products from the body
-    const { products } = req.body;
-    if (products.length < 1 || !products)
+    const { cart } = req.body;
+    if (cart.length < 1 || !cart)
       return res.send({
         ok: false,
         message: "Please select at least 1 product",
       });
     // 5. preparing products for Stripe by adding currency and multiplying prices by 100
-    const line = products.map((item) => ({
+    const line = cart.map((item) => ({
       price_data: {
         currency: process.env.CURRENCY,
-        unit_amount: item.amount * 100,
+        unit_amount: item.price * 100,
         product_data: {
           name: item.name,
           description: item.description,
@@ -41,7 +41,7 @@ const create_checkout_session = async (req, res) => {
 
       // 7. If payment would be successful this would be url of redirect in the client to which we will be  passing the id of the session which is a way to retrieve info about the order/payment
       success_url: `${process.env.DOMAIN}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.DOMAIN}/`,
+      cancel_url: `${process.env.DOMAIN}/catalog`,
     });
     // 8. If session created  successful we send back ok and session id to the client
     return res.send({ ok: true, sessionId: session.id });

@@ -5,10 +5,17 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddCat from "../components/AddCat";
 import Categories from "../components/Categories";
 import AddProd from "../components/AddProd";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+
 function Catalog() {
   return (
     <div>
-      <Categories />
+      <Elements stripe={stripePromise}>
+        <Categories />
+      </Elements>
     </div>
   );
 }

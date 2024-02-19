@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useStripe } from "@stripe/react-stripe-js";
+import { useNavigate } from "react-router-dom";
+import { URL } from "../config.js";
 
 function Categories() {
   const [categories, setCategories] = useState(null);
   const [productsByCategory, setProductsByCategory] = useState({});
   const [cart, setCart] = useState([]);
+  const navigate = useNavigate();
+  const stripe = useStripe();
+
   const fetchCategories = async () => {
     try {
       const cats = await axios.get("http://localhost:5010/category/categories");
@@ -81,6 +86,60 @@ function Categories() {
     (total, item) => total + item.price * item.quantity,
     0
   );
+
+  const createCheckoutSession = async () => {
+    try {
+      // debugger;
+      // 2. Sending request to the create_checkout_session controller and passing products to be paid for
+      // const pass = { products: cart };
+      const response = await axios.post(
+        `${URL}/payment/create-checkout-session`,
+        { cart }
+      );
+      return response.data.ok
+        ? // we save session id in localStorage to get it later
+          (localStorage.setItem(
+            "sessionId",
+            JSON.stringify(response.data.sessionId)
+          ),
+          // 9. If server returned ok after making a session we run redirect() and pass id of the session to the actual checkout / payment form
+          redirect(response.data.sessionId))
+        : navigate("../pages/payment_error");
+    } catch (error) {
+      navigate("/pages/payment_error");
+    }
+  };
+
+  const redirect = (sessionId) => {
+    // debugger;
+    // 10. This redirects to checkout.stripe.com and if charge/payment was successful send user to success url defined in create_checkout_session in the controller (which in our case renders payment_success.js)
+    stripe
+      .redirectToCheckout({
+        // Make the id field from the Checkout Session creation API response
+        // available to this file, so you can provide it as parameter here
+        // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+        sessionId: sessionId,
+      })
+      .then(function (result) {
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer
+        // using `result.error.message`.
+      });
+  };
+
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (cart.length) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+  }, [cart]);
+
   return (
     <div>
       <h2>Cart</h2>
@@ -95,7 +154,9 @@ function Categories() {
         ))}
       </ul>
       <p>Total Price: ${totalPrice.toFixed(2)}</p>
-      <button>Finish shopping and proceed</button>
+      <button onClick={() => createCheckoutSession()}>
+        Finish shopping and proceed
+      </button>
       <h1>Categories</h1>
 
       {categories ? (
