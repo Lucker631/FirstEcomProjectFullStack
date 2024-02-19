@@ -35,7 +35,7 @@ require("dotenv").config();
 const port = process.env.PORT || 5050;
 app.use(require("cors")());
 const mongoose = require("mongoose");
-
+app.use("/payment", require("./routes/payment.route.js"));
 mongoose.set("debug", true);
 
 async function connectingDB() {
