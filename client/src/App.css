@@ -5,6 +5,10 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
+  
+}
+body{
+  padding-top: 13vh;
 }
 .App {
   font-family: "Archivo", sans-serif;
@@ -22,7 +26,7 @@
   height: 13vh;
 }
 .welcome{
-  margin-top: 20px;
+  /* margin-top: 20px; */
   text-align: center;
   font-family: "Pacifico", cursive;
   font-weight: 200;
@@ -31,6 +35,10 @@
 }
 
 .nav{
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  top: 0px;
   list-style: none;
   background: rgb(0,0,0);
   background: linear-gradient(165deg, rgba(0,0,0,1) 35%, rgba(218,165,32,1) 100%);
@@ -98,6 +106,35 @@ form {
   transform: translateY(2px); 
   box-shadow: 0 0 #666;
 }
+/* .home-gallery-container-div{
+  align-items: center;
+  text-align: center;
+} */
+.home-gallery-container{
+  display: flex;
+  justify-content: space-around;
+  height: 40%;
+  padding-bottom: 50%;
+}
+/* .home-gallery{
+  width: 600px; 
+  height: 400px;
+} */
+.gallery-image{
+  width: 800px; 
+  height: 500px;
+}
+.map-div{
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.flex-home-upload{
+  text-align: center;
+}
+.map{
+  border: 10px solid rgb(202, 162, 52);
+}
 .contact-form{
   border: 1px solid grey;
   width: 100%;
@@ -140,6 +177,10 @@ form {
   text-align: center;
   color: rgb(202, 162, 52);
 }
+.gallery-prod-div{
+  border: 3px solid goldenrod;
+  border-radius: 3px;
+}
 .categories-card{
   
 }
@@ -150,7 +191,7 @@ form {
 }
 .header-text-catalog-categories-type{
   text-align: center;
-  color: rgb(202, 162, 52);
+  color: rgb(255, 255, 255);
   text-shadow: 1px 0 #000000, -1px 0 #000000, 0 1px #000000, 0 -1px #000000,
   1px 1px #000000, -1px -1px #000000, 1px -1px #000000, -1px 1px #000000
 }
@@ -186,8 +227,9 @@ form {
 }
 .price-descr{
 margin-left: 30px;
-border: 2px;
-border-radius: 10px;
+border: 3px solid goldenrod;
+ 
+border-radius: 3px;
 background-color: white;
 }
 .cart-total{
@@ -274,7 +316,7 @@ list-style: none;
   border: 1px solid black;
   padding: 2rem;
   border-radius: 6px;
-  background-color: #ffd700
+  background-color: #Daa520
 }
 .category-div ul {
   list-style: none;
@@ -286,7 +328,8 @@ list-style: none;
   border: 1px solid black;
   border-radius: 6px;
   padding: 2rem;
-  width: 70%
+  width: 70%;
+  background-color: white;
 }
 .header-text{
   color: green;
@@ -304,10 +347,9 @@ justify-content: center;
 width: 100%;
 display: grid;
 grid-template-columns: 1fr 1fr;
-
 padding: 2rem;
-
 place-items: center;
+grid-gap: 20px;
 }
 .payment-image {
   max-height: 5vh;

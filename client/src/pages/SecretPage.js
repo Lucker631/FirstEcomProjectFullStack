@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AddCat from "../components/AddCat";
 import AddProd from "../components/AddProd";
-// import UploadImages from "./UploadImages";
+import UploadImages from "./UploadImagesHome";
 
-const SecretPage = ({ user }) => {
+const SecretPage = ({ user, fetch_pictures }) => {
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -107,17 +107,6 @@ const SecretPage = ({ user }) => {
   //   fetch_pictures();
   // }, []);
 
-  // const fetch_pictures = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       "http://localhost:5010/pictures/get_all"
-  //     );
-  //     setPictures([...response.data.pictures]);
-  //   } catch (error) {
-  //     debugger;
-  //   }
-  // };
-
   // const remove_picture = async (_id, idx) => {
   //   try {
   //     await axios.delete(`http://localhost:5010/pictures/remove/${_id}`);
@@ -173,27 +162,6 @@ const SecretPage = ({ user }) => {
                       categoriesState={categoriesState}
                       setCategoriesState={setCategoriesState}
                     />
-                    {/* <div className="header">
-                      <UploadImages fetch_pictures={fetch_pictures} />
-                    </div> 
-                    <div className="pictures_container">
-                      {pictures.map((picture, idx) => {
-                        return (
-                          <div key={idx} className="picture_container">
-                            <img
-                              alt="example_image"
-                              src={picture.photo_url}
-                              style={{ width: "70%" }}
-                            />
-                            <button
-                              onClick={() => remove_picture(picture._id, idx)}
-                            >
-                              Remove picture
-                            </button>
-                          </div>
-                        );
-                      })}
-                    </div> */}
                   </ul>
                 )}
               </div>
@@ -203,6 +171,7 @@ const SecretPage = ({ user }) => {
           )}
         </div>
       </div>
+      <UploadImages fetch_pictures={fetch_pictures} />
     </div>
   );
 };

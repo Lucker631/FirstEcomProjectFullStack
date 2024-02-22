@@ -86,7 +86,7 @@ app.use("/category", require("./routes/categories"));
 app.use("/product", require("./routes/products"));
 app.use("/users", require("./routes/users.routes"));
 app.use("/emails", require("./routes/emails.routes.js"));
-// app.use("/pictures", require("./routes/pictures.routes"));
+app.use("/pictures", require("./routes/pictures.routes"));
 // end ADMINJS
 
 app.listen(port, () => console.log(`Serv is running at ${port}`));

@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "../media/logo.JPG";
+import ImageGallery from "react-image-gallery";
 
-function Home() {
+function Home({ fetch_pictures }) {
+  const [homeImg, sethomeImg] = useState([]);
+  useEffect(() => {
+    fetch_pictures(sethomeImg);
+  }, []);
+  // const imageUrls = homeImg.map((homePhotos) => {
+  //   return { original: homePhotos.photo_url, thumbnail: homePhotos.photo_url };
+  // });
   return (
     <div className="home">
       <h1 className="welcome">Welcome to</h1>
       <div className="logo-container">
         <img className="logo" src={Image} />
       </div>
+
       <div className="grid-home">
         <div className="home-text">
           <h1 className="header-text">OUR MISSION</h1>
@@ -40,14 +49,50 @@ function Home() {
             Stand with US, and together we will stand for THEM!
           </p>
         </div>
+
+        <div className="home-gallery-container">
+          <ImageGallery
+            className="home-gallery"
+            items={homeImg.map((homePhotos) => ({
+              original: homePhotos.photo_url,
+              thumbnail: homePhotos.photo_url,
+            }))}
+            slideInterval={2000}
+            autoPlay={true}
+            showNav={false}
+            showBullets={false}
+            showThumbnails={false}
+            showPlayButton={false}
+            showFullscreenButton={false}
+            renderItem={(item) => (
+              <img src={item.original} className="gallery-image" />
+            )}
+          />
+        </div>
+        {/* <div></div>
+        <div></div> */}
         <img
           className="home-img"
           src="https://thumbs.dreamstime.com/b/female-hand-patting-happy-cat-isolated-white-background-55341628.jpg"
         />
-        <img
-          className="home-img"
-          src="https://t3.ftcdn.net/jpg/05/82/67/96/360_F_582679641_zCnWSvan9oScBHyWzfirpD4MKGp0kylJ.jpg"
-        />
+        <div className="home-text">
+          <h1 className="header-text">Why us</h1>
+          <p>
+            At Pawfriend, our passion for animals fuels everything we do. We
+            believe that our furry companions deserve nothing but the best,
+            which is why we're dedicated to providing top-quality products and
+            unparalleled care. With each purchase you make, you're not just
+            pampering your pet—you're also supporting our mission to make a
+            difference in the lives of animals in need. Every day, countless
+            animals face uncertainty, whether due to homelessness, neglect, or
+            abuse. By standing with us, you're standing up for them, ensuring
+            they receive the love, attention, and resources they deserve. Join
+            our community at Pawfriend, where compassion meets action, and
+            together, let's make the world a better place for all our
+            four-legged friends.
+          </p>
+        </div>
+
         <div className="home-text">
           <h1 className="header-text"> DELIVERY METHODS</h1>
           <p>
@@ -81,6 +126,10 @@ function Home() {
             email.
           </p>
         </div>
+        <img
+          className="home-img"
+          src="https://t3.ftcdn.net/jpg/05/82/67/96/360_F_582679641_zCnWSvan9oScBHyWzfirpD4MKGp0kylJ.jpg"
+        />
       </div>
     </div>
   );

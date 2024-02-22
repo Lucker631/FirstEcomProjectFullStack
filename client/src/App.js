@@ -65,6 +65,17 @@ function App() {
     // Redirect to home page after logout
     window.location.href = "/";
   };
+  const fetch_pictures = async (setter) => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5010/pictures/get_all"
+      );
+      // debugger;
+      setter([...response.data.pictures]);
+    } catch (error) {
+      debugger;
+    }
+  };
 
   return (
     <div className="App">
@@ -77,6 +88,7 @@ function App() {
         href="https://fonts.googleapis.com/css2?family=Courgette&family=Pacifico&display=swap"
         rel="stylesheet"
       ></link>
+
       <Router>
         <Navbar
           isLoggedIn={isLoggedIn}
@@ -84,7 +96,7 @@ function App() {
           user={user}
         />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home fetch_pictures={fetch_pictures} />} />
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/contact" element={<Contact />} />
           {/* <Route path="/trackOrder" element={<TrackOrder />} /> */}
@@ -110,7 +122,11 @@ function App() {
               !isLoggedIn ? (
                 <Navigate to="/" />
               ) : (
-                <SecretPage logout={logout} user={user} />
+                <SecretPage
+                  fetch_pictures={fetch_pictures}
+                  logout={logout}
+                  user={user}
+                />
               )
             }
           />

@@ -73,11 +73,21 @@ function Contact() {
           placeholder="Your contact email?"
           name="email"
         />
-
         <button className="form-button" type="submit" label="Send">
           Send!
         </button>
       </form>
+      <div className="map-div">
+        <iframe
+          className="map"
+          src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d748.2910074947412!2d2.151011269658643!3d41.39224400430387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDHCsDIzJzMyLjEiTiAywrAwOScwNi4wIkU!5e0!3m2!1sru!2ses!4v1708602131434!5m2!1sru!2ses"
+          width="50%"
+          height="450"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
     </div>
   );
 }

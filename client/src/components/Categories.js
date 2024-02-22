@@ -210,22 +210,24 @@ function Categories() {
                               src={product.image[0].photo_url}
                               alt={product.name}
                             /> */}
-                            <ImageGallery
-                              items={product.image?.map((e) => {
-                                // debugger;
-                                return {
-                                  original: e?.photo_url,
-                                  thumbnail: e?.photo_url,
-                                };
-                              })}
-                              slideInterval={2000}
-                              autoPlay={true}
-                              showNav={false}
-                              showBullets={false}
-                              showThumbnails={false}
-                              showPlayButton={false}
-                              showFullscreenButton={false}
-                            />
+                            <div className="gallery-prod-div">
+                              <ImageGallery
+                                items={product.image?.map((e) => {
+                                  // debugger;
+                                  return {
+                                    original: e?.photo_url,
+                                    thumbnail: e?.photo_url,
+                                  };
+                                })}
+                                slideInterval={2000}
+                                autoPlay={true}
+                                showNav={false}
+                                showBullets={false}
+                                showThumbnails={false}
+                                showPlayButton={false}
+                                showFullscreenButton={false}
+                              />
+                            </div>
                             <div className="flex-price-descr">
                               <div className="price-descr">
                                 <div className="product-card-grid">
