@@ -3,6 +3,33 @@ const Products = require("../schemas/products");
 // const Users = require("../schemas/users");
 // const Description = require("../schemas/description");
 
+// const Pictures = require("../schemas/pictures.models");
+const cloudinary = require("cloudinary");
+// remember to add your credentials to .env file
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
+
+// const upload = async (req, res) => {
+//   const { files } = req.body;
+//   let pictures = files.map((pic) => {
+//     return {
+//       public_id: pic.uploadInfo.public_id,
+//       photo_url: pic.uploadInfo.secure_url,
+//     };
+//   });
+
+//   try {
+//     const created = await Pictures.create(pictures);
+//     console.log(created);
+//     res.json({ ok: true, created });
+//   } catch (error) {
+//     res.json({ ok: false });
+//   }
+// };
+
 const product_add = async (req, res) => {
   const { category, name, price, color, description, image } = req.body;
   try {

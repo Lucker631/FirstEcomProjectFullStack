@@ -53,7 +53,7 @@ const Register = (props) => {
       <label>Repeat password</label>
       <input name="password2" />
 
-      <button>register</button>
+      <button className="form-button">register</button>
       <div className="message">
         <h4>{message}</h4>
       </div>

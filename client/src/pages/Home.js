@@ -1,8 +1,13 @@
 import React from "react";
+import Image from "../media/logo.JPG";
 
 function Home() {
   return (
     <div className="home">
+      <h1 className="welcome">Welcome to</h1>
+      <div className="logo-container">
+        <img className="logo" src={Image} />
+      </div>
       <div className="grid-home">
         <div className="home-text">
           <h1 className="header-text">OUR MISSION</h1>
@@ -37,11 +42,11 @@ function Home() {
         </div>
         <img
           className="home-img"
-          src="https://assets.petco.com/petco/image/upload/f_auto,q_auto/3627837-center-3"
+          src="https://thumbs.dreamstime.com/b/female-hand-patting-happy-cat-isolated-white-background-55341628.jpg"
         />
         <img
           className="home-img"
-          src="https://assets.petco.com/petco/image/upload/f_auto,q_auto/3627837-center-3"
+          src="https://t3.ftcdn.net/jpg/05/82/67/96/360_F_582679641_zCnWSvan9oScBHyWzfirpD4MKGp0kylJ.jpg"
         />
         <div className="home-text">
           <h1 className="header-text"> DELIVERY METHODS</h1>

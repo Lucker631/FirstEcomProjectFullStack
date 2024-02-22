@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import UploadImages from "../pages/UploadImages";
 function AddProd({
   fetchProducts,
   category,
@@ -16,19 +16,6 @@ function AddProd({
     image: [],
   });
 
-  // const handleAddProduct = async (categoryName, productName) => {
-  //   try {
-  //     await axios.post("http://localhost:5010/product/add", {
-  //       category: categoryName,
-  //       name: productName,
-  //     });
-  //     debugger;
-  //     const updatedCategories = await fetchProducts(categoriesState);
-  //     setCategoriesState(updatedCategories);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -47,12 +34,6 @@ function AddProd({
           image: [],
         });
 
-        // const updatedProductsResponse = await axios.post(
-        //   "http://localhost:5010/product/products",
-        //   { category: category }
-        // );
-        // const updatedProducts = updatedProductsResponse.data.data;
-
         const categoriesWithProducts = await fetchProducts([
           ...categoriesState,
         ]);
@@ -69,6 +50,33 @@ function AddProd({
     setProduct({ ...product, [name]: value });
   };
 
+  const [pictures, setPictures] = useState([]);
+
+  // useEffect(() => {
+  //   fetch_pictures();
+  // }, []);
+
+  // const fetch_pictures = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       "http://localhost:5010/products/get_all"
+  //     );
+  //     setPictures([...response.data.pictures]);
+  //   } catch (error) {
+  //     debugger;
+  //   }
+  // };
+
+  const remove_picture = async (_id, idx) => {
+    try {
+      await axios.delete(`http://localhost:5010/pictures/remove/${_id}`);
+      const temp = pictures;
+      temp.splice(idx, 1);
+      setPictures([...temp]);
+    } catch (error) {
+      debugger;
+    }
+  };
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -118,8 +126,29 @@ function AddProd({
           value={product.image}
           onChange={handleChange}
         />
+        <div className="header">
+          <UploadImages productSetter={setProduct} />
+        </div>
+        <div className="pictures_container">
+          {pictures.map((picture, idx) => {
+            return (
+              <div key={idx} className="picture_container">
+                <img
+                  alt="example_image"
+                  src={picture.photo_url}
+                  style={{ width: "70%" }}
+                />
+                <button onClick={() => remove_picture(picture._id, idx)}>
+                  Remove picture
+                </button>
+              </div>
+            );
+          })}
+        </div>
         <br />
-        <button type="submit">Add Product</button>
+        <button className="form-button" type="submit">
+          Add Product
+        </button>
       </form>
     </div>
   );

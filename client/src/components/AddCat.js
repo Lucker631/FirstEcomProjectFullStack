@@ -23,7 +23,9 @@ function AddCat({ fetchCategories }) {
     <div>
       <form onSubmit={handleSubmit}>
         <input value={category} onChange={(e) => setCategory(e.target.value)} />
-        <button type="submit">Add category</button>
+        <button className="form-button" type="submit">
+          Add category
+        </button>
       </form>
     </div>
   );

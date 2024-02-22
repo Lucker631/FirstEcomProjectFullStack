@@ -29,8 +29,13 @@
 const express = require("express");
 const app = express();
 // accept certain POST bodytypes
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
+// Controlling the maximum request body size will do the trick, however, you do not need body-parser anymore. Instead of using body-parser middleware, use the new Express implementation:
+
+app.use(express.json({ limit: "50mb" }));
+app.use(
+  express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 })
+);
 require("dotenv").config();
 const port = process.env.PORT || 5050;
 app.use(require("cors")());
@@ -80,6 +85,8 @@ app.use(admin.options.rootPath, router);
 app.use("/category", require("./routes/categories"));
 app.use("/product", require("./routes/products"));
 app.use("/users", require("./routes/users.routes"));
+app.use("/emails", require("./routes/emails.routes.js"));
+// app.use("/pictures", require("./routes/pictures.routes"));
 // end ADMINJS
 
 app.listen(port, () => console.log(`Serv is running at ${port}`));

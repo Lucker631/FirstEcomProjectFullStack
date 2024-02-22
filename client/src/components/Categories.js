@@ -3,11 +3,14 @@ import axios from "axios";
 import { useStripe } from "@stripe/react-stripe-js";
 import { useNavigate } from "react-router-dom";
 import { URL } from "../config.js";
+import ImageGallery from "react-image-gallery";
 
 function Categories() {
   const [categories, setCategories] = useState(null);
   const [productsByCategory, setProductsByCategory] = useState({});
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart")) || []
+  );
   const navigate = useNavigate();
   const stripe = useStripe();
 
@@ -128,42 +131,72 @@ function Categories() {
   };
 
   useEffect(() => {
-    const savedCart = localStorage.getItem("cart");
+    // debugger;
+    const savedCart = JSON.parse(localStorage.getItem("cart"));
     if (savedCart) {
-      setCart(JSON.parse(savedCart));
+      setCart(savedCart);
     }
   }, []);
 
   useEffect(() => {
-    if (cart.length) {
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
+    localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
+
+  const renderProductImage = (imageUrl, productName) => (
+    <img className="cart-img" src={imageUrl} alt={productName} />
+  );
 
   return (
     <div>
-      <h2>Cart</h2>
-      <ul>
-        {cart.map((item) => (
-          <li key={item._id}>
-            <p>
-              {item.name} - Quantity: {item.quantity}
-            </p>
-            <button onClick={() => removeFromCart(item._id)}>Remove One</button>
-          </li>
-        ))}
-      </ul>
-      <p>Total Price: ${totalPrice.toFixed(2)}</p>
-      <button onClick={() => createCheckoutSession()}>
-        Finish shopping and proceed
-      </button>
-      <h1>Categories</h1>
+      <div className="cart-total">
+        <div className="cart-container">
+          <h1 className="header-text-catalog">Cart</h1>
+          <ul>
+            {cart.map((item) => (
+              <li key={item._id}>
+                <div className="cart-ul-div">
+                  {renderProductImage(item.image[0].photo_url, item.name)}
+                  <p>
+                    <p className="cart-ul-div-name">{item.name}</p>Quantity:{" "}
+                    {item.quantity}
+                  </p>
+                  <div className="flex-remove">
+                    <button
+                      className="remove-button"
+                      onClick={() => removeFromCart(item._id)}
+                    >
+                      Remove One
+                    </button>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="total">
+          <h2>
+            <p className="header-text-catalog">Total Price:</p>{" "}
+            <p className="price-cart">${totalPrice.toFixed(2)}</p>
+          </h2>
+          <div className="flex-total">
+            <button
+              className="total-button"
+              onClick={() => createCheckoutSession()}
+            >
+              Finish shopping and proceed
+            </button>
+          </div>
+        </div>
+      </div>
+      <h1 className="header-text-catalog-categories">Categories</h1>
 
       {categories ? (
-        <div>
+        <div className="categories-card">
           {categories.map((category) => (
             <div className="category-div" key={category.category}>
-              <p>{category.category}</p>
+              <h2 className="header-text-catalog-categories-type">
+                {category.category}
+              </h2>
               {productsByCategory[category.category] && (
                 <ul>
                   {productsByCategory[category.category]
@@ -171,25 +204,55 @@ function Categories() {
                     .map((product) => (
                       <li key={product._id}>
                         <div className="product-card">
-                          <img
-                            className="product-image"
-                            src={product.image}
-                            alt={product.name}
-                          />
-                          <p className="product-name"> {product.name}</p>
-                          <p className="product-price">
-                            Price: {product.price}
-                          </p>
-                          <p className="product-color">
-                            Color: {product.color}
-                          </p>
-                          <p className="product-description">
-                            Description: {product.description}
-                          </p>{" "}
-                          <div>
-                            <button onClick={() => addToCart(product)}>
-                              Add to Cart
-                            </button>
+                          <div className="parent-grid">
+                            {/* <img
+                              className="product-image"
+                              src={product.image[0].photo_url}
+                              alt={product.name}
+                            /> */}
+                            <ImageGallery
+                              items={product.image?.map((e) => {
+                                // debugger;
+                                return {
+                                  original: e?.photo_url,
+                                  thumbnail: e?.photo_url,
+                                };
+                              })}
+                              slideInterval={2000}
+                              autoPlay={true}
+                              showNav={false}
+                              showBullets={false}
+                              showThumbnails={false}
+                              showPlayButton={false}
+                              showFullscreenButton={false}
+                            />
+                            <div className="flex-price-descr">
+                              <div className="price-descr">
+                                <div className="product-card-grid">
+                                  <p className="product-name">
+                                    {" "}
+                                    {product.name}
+                                  </p>
+                                  <p className="product-price">
+                                    Price: {product.price}
+                                  </p>
+                                  <p className="product-color">
+                                    Color: {product.color}
+                                  </p>
+                                </div>
+                                <p className="product-description">
+                                  {product.description}
+                                </p>{" "}
+                              </div>
+                            </div>
+                            <div className="flex-add">
+                              <button
+                                className="colorful-button"
+                                onClick={() => addToCart(product)}
+                              >
+                                Add to Cart
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </li>

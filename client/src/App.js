@@ -6,6 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Home from "./pages/Home";
@@ -67,6 +68,15 @@ function App() {
 
   return (
     <div className="App">
+      <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
+      ></link>
+
+      <link
+        href="https://fonts.googleapis.com/css2?family=Courgette&family=Pacifico&display=swap"
+        rel="stylesheet"
+      ></link>
       <Router>
         <Navbar
           isLoggedIn={isLoggedIn}
@@ -79,7 +89,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/trackOrder" element={<TrackOrder />} />
           <Route path="/payment/success" element={<PaymentSuccess />} />
-          <Route path="/payment/error" element={<PaymentError />} />
+          <Route path="/pages/payment_error" element={<PaymentError />} />
           <Route
             path="/login"
             element={
@@ -105,6 +115,7 @@ function App() {
             }
           />
         </Routes>
+        <Footer />
       </Router>
     </div>
   );

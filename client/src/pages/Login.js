@@ -56,7 +56,7 @@ const Login = (props) => {
       <input name="email" />
       <label>Password</label>
       <input name="password" />
-      <button>login</button>
+      <button className="form-button">login</button>
       <div className="message">
         <h4>{message}</h4>
       </div>

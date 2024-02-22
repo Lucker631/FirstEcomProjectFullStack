@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AddCat from "../components/AddCat";
 import AddProd from "../components/AddProd";
+// import UploadImages from "./UploadImages";
 
 const SecretPage = ({ user }) => {
   let navigate = useNavigate();
@@ -100,7 +101,33 @@ const SecretPage = ({ user }) => {
     });
     setCategoriesState(updatedCategories);
   };
+  // const [pictures, setPictures] = useState([]);
 
+  // useEffect(() => {
+  //   fetch_pictures();
+  // }, []);
+
+  // const fetch_pictures = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       "http://localhost:5010/pictures/get_all"
+  //     );
+  //     setPictures([...response.data.pictures]);
+  //   } catch (error) {
+  //     debugger;
+  //   }
+  // };
+
+  // const remove_picture = async (_id, idx) => {
+  //   try {
+  //     await axios.delete(`http://localhost:5010/pictures/remove/${_id}`);
+  //     const temp = pictures;
+  //     temp.splice(idx, 1);
+  //     setPictures([...temp]);
+  //   } catch (error) {
+  //     debugger;
+  //   }
+  // };
   return (
     <div className="secret_page">
       <AddCat fetchCategories={fetchCategories} />
@@ -111,10 +138,16 @@ const SecretPage = ({ user }) => {
             categoriesState.map((cat) => (
               <div key={cat._id}>
                 <p>{cat.category}</p>
-                <button onClick={() => handleDeleteCategory(cat.category)}>
+                <button
+                  className="remove-button"
+                  onClick={() => handleDeleteCategory(cat.category)}
+                >
                   Delete
                 </button>
-                <button onClick={() => handleExpandProducts(cat._id)}>
+                <button
+                  className="colorful-button"
+                  onClick={() => handleExpandProducts(cat._id)}
+                >
                   {cat.expanded ? "Collapse Products" : "Expand Products"}
                 </button>
                 {cat.expanded && (
@@ -125,6 +158,7 @@ const SecretPage = ({ user }) => {
                         <div>
                           <li key={product._id}>{product.name}</li>
                           <button
+                            className="remove-button"
                             onClick={() =>
                               handleDeleteProduct(cat.category, product.name)
                             }
@@ -139,6 +173,27 @@ const SecretPage = ({ user }) => {
                       categoriesState={categoriesState}
                       setCategoriesState={setCategoriesState}
                     />
+                    {/* <div className="header">
+                      <UploadImages fetch_pictures={fetch_pictures} />
+                    </div> 
+                    <div className="pictures_container">
+                      {pictures.map((picture, idx) => {
+                        return (
+                          <div key={idx} className="picture_container">
+                            <img
+                              alt="example_image"
+                              src={picture.photo_url}
+                              style={{ width: "70%" }}
+                            />
+                            <button
+                              onClick={() => remove_picture(picture._id, idx)}
+                            >
+                              Remove picture
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div> */}
                   </ul>
                 )}
               </div>

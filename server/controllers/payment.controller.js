@@ -14,7 +14,7 @@ const create_checkout_session = async (req, res) => {
     const line = cart.map((item) => ({
       price_data: {
         currency: process.env.CURRENCY,
-        unit_amount: item.price * 100,
+        unit_amount: Math.round(item.price * 100),
         product_data: {
           name: item.name,
           description: item.description,

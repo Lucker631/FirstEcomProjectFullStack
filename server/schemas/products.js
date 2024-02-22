@@ -11,12 +11,19 @@ const productSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   color: { type: String, required: true },
   description: { type: String, required: true },
-  image: [{ type: String, required: true }],
-
-  //   description_id: {
-  //     type: Schema.Types.ObjectId,
-  //     required: true,
-  //     ref: "description",
-  //   },
+  image: [
+    {
+      photo_url: {
+        type: String,
+        unique: true,
+        required: true,
+      },
+      public_id: {
+        type: String,
+        unique: true,
+        required: true,
+      },
+    },
+  ],
 });
 module.exports = mongoose.model("product", productSchema);
