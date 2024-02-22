@@ -12,7 +12,7 @@ import axios from "axios";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Catalog from "./pages/Catalog";
-import TrackOrder from "./pages/TrackOrder";
+// import TrackOrder from "./pages/TrackOrder";
 import Login from "./pages/Login.js";
 import Register from "./pages/Register.js";
 import SecretPage from "./pages/SecretPage.js";
@@ -87,7 +87,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/trackOrder" element={<TrackOrder />} />
+          {/* <Route path="/trackOrder" element={<TrackOrder />} /> */}
           <Route path="/payment/success" element={<PaymentSuccess />} />
           <Route path="/pages/payment_error" element={<PaymentError />} />
           <Route

@@ -35,7 +35,7 @@ const Navbar = ({ isLoggedIn, handleLogout, user }) => {
             Contact
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink
             to="/trackOrder"
             style={({ isActive }) =>
@@ -44,7 +44,7 @@ const Navbar = ({ isLoggedIn, handleLogout, user }) => {
           >
             Track your order
           </NavLink>
-        </li>
+        </li> */}
         {isLoggedIn === false && (
           <>
             <NavLink
@@ -96,11 +96,19 @@ const Navbar = ({ isLoggedIn, handleLogout, user }) => {
 };
 export default Navbar;
 const linkStyles = {
-  activeLink: {
-    color: "lightgray",
-  },
   defaultLink: {
+    display: "inline-block",
+    padding: "10px 20px",
     textDecoration: "none",
-    color: "white",
+    backgroundColor: "#daa520", // You can change this color to your preference
+    color: "#000000", // Text color
+    border: "1px solid transparent", // Optional: Add border for better distinction
+    borderRadius: "5px", // Optional: Rounded corners
+    transition: "background-color 0.3s ease", // Smooth transition on hover
+  },
+  activeLink: {
+    backgroundColor: "#926f17", // Change button color for active link
+    border: "1px solid transparent",
+    borderRadius: "5px",
   },
 };

@@ -48,7 +48,7 @@ const UploadImages = ({ productSetter }) => {
     <div className="flex_upload">
       {/* form to add title, description, author, date -- onchange goes to state */}
       <div className="upload">
-        <button className="button" onClick={uploadWidget}>
+        <button className="form-button" onClick={uploadWidget}>
           Open widget
         </button>
       </div>
