@@ -210,23 +210,39 @@ function Categories() {
                               src={product.image[0].photo_url}
                               alt={product.name}
                             /> */}
-                            <div className="gallery-prod-div">
-                              <ImageGallery
-                                items={product.image?.map((e) => {
-                                  // debugger;
-                                  return {
-                                    original: e?.photo_url,
-                                    thumbnail: e?.photo_url,
-                                  };
-                                })}
-                                slideInterval={2000}
-                                autoPlay={true}
-                                showNav={false}
-                                showBullets={false}
-                                showThumbnails={false}
-                                showPlayButton={false}
-                                showFullscreenButton={false}
-                              />
+                            <div>
+                              <div className="gallery-prod-div">
+                                <ImageGallery
+                                  items={product.image?.map((e) => {
+                                    // debugger;
+                                    return {
+                                      original: e?.photo_url,
+                                      thumbnail: e?.photo_url,
+                                    };
+                                  })}
+                                  slideInterval={2000}
+                                  autoPlay={true}
+                                  showNav={false}
+                                  showBullets={false}
+                                  showThumbnails={false}
+                                  showPlayButton={false}
+                                  showFullscreenButton={false}
+                                  renderItem={(item) => (
+                                    <img
+                                      src={item.original}
+                                      className="gallery-image-prod"
+                                    />
+                                  )}
+                                />
+                              </div>
+                              <div className="flex-add">
+                                <button
+                                  className="colorful-button"
+                                  onClick={() => addToCart(product)}
+                                >
+                                  Add to Cart
+                                </button>
+                              </div>
                             </div>
                             <div className="flex-price-descr">
                               <div className="price-descr">
@@ -246,14 +262,6 @@ function Categories() {
                                   {product.description}
                                 </p>{" "}
                               </div>
-                            </div>
-                            <div className="flex-add">
-                              <button
-                                className="colorful-button"
-                                onClick={() => addToCart(product)}
-                              >
-                                Add to Cart
-                              </button>
                             </div>
                           </div>
                         </div>

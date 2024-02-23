@@ -7,14 +7,16 @@ const Navbar = ({ isLoggedIn, handleLogout, user }) => {
     <div>
       <ul className="nav">
         <img className="logo-navbar" src={Image} />
-        <NavLink
-          to={"/"}
-          style={({ isActive }) =>
-            isActive ? linkStyles.activeLink : linkStyles.defaultLink
-          }
-        >
-          Home
-        </NavLink>
+        <li>
+          <NavLink
+            to={"/"}
+            style={({ isActive }) =>
+              isActive ? linkStyles.activeLink : linkStyles.defaultLink
+            }
+          >
+            Home
+          </NavLink>
+        </li>
         <li>
           <NavLink
             to="/catalog"
@@ -45,37 +47,44 @@ const Navbar = ({ isLoggedIn, handleLogout, user }) => {
             Track your order
           </NavLink>
         </li> */}
+
         {isLoggedIn === false && (
           <>
-            <NavLink
-              to="/register"
-              style={({ isActive }) =>
-                isActive ? linkStyles.activeLink : linkStyles.defaultLink
-              }
-            >
-              Register
-            </NavLink>
-            <NavLink
-              to="/login"
-              style={({ isActive }) =>
-                isActive ? linkStyles.activeLink : linkStyles.defaultLink
-              }
-            >
-              Login
-            </NavLink>
+            <li>
+              <NavLink
+                to="/register"
+                style={({ isActive }) =>
+                  isActive ? linkStyles.activeLink : linkStyles.defaultLink
+                }
+              >
+                Register
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/login"
+                style={({ isActive }) =>
+                  isActive ? linkStyles.activeLink : linkStyles.defaultLink
+                }
+              >
+                Login
+              </NavLink>
+            </li>
           </>
         )}
         {isLoggedIn && (
           <>
             {user.role === "admin" && (
-              <NavLink
-                to="/secret-page"
-                style={({ isActive }) =>
-                  isActive ? linkStyles.activeLink : linkStyles.defaultLink
-                }
-              >
-                Secret
-              </NavLink>
+              <li>
+                <NavLink
+                  to="/secret-page"
+                  style={({ isActive }) =>
+                    isActive ? linkStyles.activeLink : linkStyles.defaultLink
+                  }
+                >
+                  Secret
+                </NavLink>
+              </li>
             )}
             <li>
               <NavLink

@@ -31,7 +31,7 @@ const PaymentSuccess = () => {
 
   return (
     <div className="message_container">
-      <div style={{ border: "2px solid  #35BFDE" }} className="message_box">
+      <div style={{ border: "2px solid  #daa520" }} className="message_box">
         <div className="message_box_left">
           <img
             alt="smile_icon"
@@ -41,7 +41,7 @@ const PaymentSuccess = () => {
             }
           />
         </div>
-        <div style={{ color: "#35BFDE" }} className="message_box_right">
+        <div style={{ color: "#daa520" }} className="message_box_right">
           Payment Successfull
         </div>
       </div>

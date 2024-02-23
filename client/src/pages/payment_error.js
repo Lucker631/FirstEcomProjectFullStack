@@ -4,7 +4,7 @@ const PaymentError = (props) => {
   debugger;
   return (
     <div className="message_container">
-      <div style={{ border: "2px solid  #FF395B" }} className="message_box">
+      <div style={{ border: "2px solid  #daa520" }} className="message_box">
         <div className="message_box_left">
           <img
             alt="sad_icon"
@@ -12,7 +12,7 @@ const PaymentError = (props) => {
             src={"http://cdn.onlinewebfonts.com/svg/img_56533.png"}
           />
         </div>
-        <div style={{ color: "#FF395B" }} className="message_box_right">
+        <div style={{ color: "#daa520" }} className="message_box_right">
           Payment Error
         </div>
       </div>

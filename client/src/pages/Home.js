@@ -71,10 +71,12 @@ function Home({ fetch_pictures }) {
         </div>
         {/* <div></div>
         <div></div> */}
-        <img
-          className="home-img"
-          src="https://thumbs.dreamstime.com/b/female-hand-patting-happy-cat-isolated-white-background-55341628.jpg"
-        />
+        <div className="home-image-container">
+          <img
+            className="home-img"
+            src="https://t3.ftcdn.net/jpg/05/82/67/96/360_F_582679641_zCnWSvan9oScBHyWzfirpD4MKGp0kylJ.jpg"
+          />
+        </div>
         <div className="home-text">
           <h1 className="header-text">Why us</h1>
           <p>
@@ -126,10 +128,12 @@ function Home({ fetch_pictures }) {
             email.
           </p>
         </div>
-        <img
-          className="home-img"
-          src="https://t3.ftcdn.net/jpg/05/82/67/96/360_F_582679641_zCnWSvan9oScBHyWzfirpD4MKGp0kylJ.jpg"
-        />
+        <div className="home-image-container">
+          <img
+            className="home-img"
+            src="https://thumbs.dreamstime.com/b/female-hand-patting-happy-cat-isolated-white-background-55341628.jpg"
+          />
+        </div>
       </div>
     </div>
   );
