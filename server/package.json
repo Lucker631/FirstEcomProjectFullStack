@@ -24,9 +24,9 @@
     "validator": "^13.11.0"
   },
   "devDependencies": {
-    "@adminjs/express": "^5.0.1",
-    "@adminjs/mongoose": "^3.0.1",
-    "adminjs": "^6.6.5",
+    "@adminjs/express": "^6.1.0",
+    "@adminjs/mongoose": "^4.0.0",
+    "adminjs": "^7.6.1",
     "express-formidable": "^1.2.0"
   }
 }
