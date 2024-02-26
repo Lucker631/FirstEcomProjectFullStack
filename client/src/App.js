@@ -20,7 +20,6 @@ import { URL } from "./config";
 import * as jose from "jose";
 import PaymentSuccess from "./pages/payment_success";
 import PaymentError from "./pages/payment_error";
-import { URL } from "../config.js";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
