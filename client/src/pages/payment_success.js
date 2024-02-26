@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+import { URL } from "../config.js";
 
 const PaymentSuccess = () => {
   useEffect(() => {
@@ -12,7 +13,7 @@ const PaymentSuccess = () => {
         const sessionId = JSON.parse(localStorage.getItem("sessionId"));
         // 13. And send request to checkout_session controller to get info from Stripe by session ID
         const response = await axios.get(
-          `http://localhost:5010/payment/checkout-session?sessionId=${sessionId}`
+          `${URL}/payment/checkout-session?sessionId=${sessionId}`
         );
         // Then removing session id from localStorage
         localStorage.removeItem("sessionId");

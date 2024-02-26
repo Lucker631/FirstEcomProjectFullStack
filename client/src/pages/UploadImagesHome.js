@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { URL } from "../config.js";
 
 const UploadImages = (fetch_pictures) => {
   const uploadWidget = () => {
@@ -33,12 +34,9 @@ const UploadImages = (fetch_pictures) => {
 
   const upload_picture = async (result) => {
     try {
-      const response = await axios.post(
-        "http://localhost:5010/pictures/upload",
-        {
-          files: result.info.files,
-        }
-      );
+      const response = await axios.post(`${URL}/pictures/upload`, {
+        files: result.info.files,
+      });
       // response.data.ok
       //   ? await props.fetch_pictures()
       //   : alert("Something went wrong");

@@ -1,13 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import { URL } from "../config.js";
 function AddCat({ fetchCategories }) {
   const [category, setCategory] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let response = await axios.post("http://localhost:5010/category/add", {
+      let response = await axios.post(`${URL}/category/add`, {
         category: category,
       });
       console.log(response);

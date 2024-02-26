@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { URL } from "../config.js";
 
 const FORM_ENDPOINT = "https://herotofu.com/start";
 function Contact() {
@@ -20,10 +21,7 @@ function Contact() {
     // sending request to the server
     try {
       // debugger;
-      const res = await axios.post(
-        "http://localhost:5010/emails/send_email",
-        data
-      );
+      const res = await axios.post(`${URL}/emails/send_email`, data);
       // printing positive response from the server
       console.log("res: ", res);
       // clearing the form inputs

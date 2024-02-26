@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { URL } from "../config.js";
 
 function ProductPage() {
   const [products, setProducts] = useState([]);
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:5010/category/categories"
-      );
+      const response = await axios.get(`${URL}/category/categories`);
       const categories = response.data.data;
       const productsPromises = categories.map(async (category) => {
         const productsResponse = await axios.get(
-          `http://localhost:5010/product_show?category=${category.category}`
+          `${URL}/product_show?category=${category.category}`
         );
         return productsResponse.data.data;
       });

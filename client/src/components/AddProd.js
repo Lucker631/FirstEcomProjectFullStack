@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UploadImages from "../pages/UploadImages";
+import { URL } from "../config.js";
 function AddProd({
   fetchProducts,
   category,
@@ -19,10 +20,7 @@ function AddProd({
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:5010/product/add",
-        product
-      );
+      const response = await axios.post(`${URL}/product/add`, product);
       console.log(response);
       if (response.status === 200) {
         setProduct({
@@ -69,7 +67,7 @@ function AddProd({
 
   const remove_picture = async (_id, idx) => {
     try {
-      await axios.delete(`http://localhost:5010/pictures/remove/${_id}`);
+      await axios.delete(`${URL}/pictures/remove/${_id}`);
       const temp = pictures;
       temp.splice(idx, 1);
       setPictures([...temp]);

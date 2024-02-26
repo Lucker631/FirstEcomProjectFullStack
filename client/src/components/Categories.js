@@ -16,7 +16,7 @@ function Categories() {
 
   const fetchCategories = async () => {
     try {
-      const cats = await axios.get("http://localhost:5010/category/categories");
+      const cats = await axios.get(`${URL}/category/categories`);
       setCategories(cats.data.data);
     } catch (error) {
       console.log(error);
@@ -25,12 +25,9 @@ function Categories() {
 
   const fetchProductsByCategory = async (category) => {
     try {
-      const productsResponse = await axios.post(
-        "http://localhost:5010/product/products",
-        {
-          category: category,
-        }
-      );
+      const productsResponse = await axios.post(`${URL}/product/products`, {
+        category: category,
+      });
       console.log("Products response:", productsResponse.data);
       return productsResponse.data.data;
     } catch (error) {

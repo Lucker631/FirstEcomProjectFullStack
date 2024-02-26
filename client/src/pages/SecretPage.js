@@ -4,6 +4,7 @@ import axios from "axios";
 import AddCat from "../components/AddCat";
 import AddProd from "../components/AddProd";
 import UploadImages from "./UploadImagesHome";
+import { URL } from "../config.js";
 
 const SecretPage = ({ user, fetch_pictures }) => {
   let navigate = useNavigate();
@@ -18,9 +19,7 @@ const SecretPage = ({ user, fetch_pictures }) => {
 
   const fetchCategories = async () => {
     try {
-      let response = await axios.get(
-        "http://localhost:5010/category/categories"
-      );
+      let response = await axios.get(`${URL}/category/categories`);
       const categories = response.data.data;
       const categoriesWithProducts = await fetchProducts(categories);
       console.log(categoriesWithProducts);
@@ -29,15 +28,15 @@ const SecretPage = ({ user, fetch_pictures }) => {
       console.log(error);
     }
   };
+  0;
 
   const fetchProducts = async (categories) => {
     const updatedCategories = [];
     for (let category of categories) {
       try {
-        const productsResponse = await axios.post(
-          "http://localhost:5010/product/products",
-          { category: category.category }
-        );
+        const productsResponse = await axios.post(`${URL}/product/products`, {
+          category: category.category,
+        });
         const categoryWithProducts = {
           ...category,
           products: productsResponse.data.data,
@@ -58,7 +57,7 @@ const SecretPage = ({ user, fetch_pictures }) => {
 
   const handleDeleteCategory = async (categoryName) => {
     try {
-      await axios.post("http://localhost:5010/category/delete", {
+      await axios.post(`${URL}/category/delete`, {
         category: categoryName,
       });
       const updatedCategories = categoriesState.filter(
@@ -72,7 +71,7 @@ const SecretPage = ({ user, fetch_pictures }) => {
 
   const handleDeleteProduct = async (categoryName, productName) => {
     try {
-      await axios.post("http://localhost:5010/product/delete", {
+      await axios.post(`${URL}/product/delete`, {
         category: categoryName,
         name: productName,
       });
