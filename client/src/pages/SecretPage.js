@@ -28,7 +28,6 @@ const SecretPage = ({ user, fetch_pictures }) => {
       console.log(error);
     }
   };
-  0;
 
   const fetchProducts = async (categories) => {
     const updatedCategories = [];
