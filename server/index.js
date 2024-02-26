@@ -57,36 +57,46 @@ connectingDB();
 
 // first install adminjs and the dependencies
 // npm i adminjs @adminjs/express @adminjs/mongoose  tslib express-formidable express-session
+const NODE_ENV = process.env.NODE_ENV; // <-- check the environment
+if (NODE_ENV === "dev") {
+  // require adminjs
+  const AdminJS = require("adminjs");
+  // require express plugin
+  const AdminJSExpress = require("@adminjs/express");
+  // require mongoose adapter
+  AdminJS.registerAdapter(require("@adminjs/mongoose"));
+  // Import all the project's models
+  const Categories = require("./schemas/categories"); // replace this for your model
+  const Products = require("./schemas/products");
+  const Users = require("./schemas/users");
+  // const Description = require("./schemas/description");
 
-// require adminjs
-const AdminJS = require("adminjs");
-// require express plugin
-const AdminJSExpress = require("@adminjs/express");
-// require mongoose adapter
-AdminJS.registerAdapter(require("@adminjs/mongoose"));
-// Import all the project's models
-const Categories = require("./schemas/categories"); // replace this for your model
-const Products = require("./schemas/products");
-const Users = require("./schemas/users");
-// const Description = require("./schemas/description");
+  // replace this for your model
+  // set up options -- models to use and a route to open dashboard
+  const adminOptions = {
+    resources: [Categories, Products, Users],
+    rootPath: "/admin",
+  };
+  // initialize adminjs
+  const admin = new AdminJS(adminOptions);
+  // build admin route
+  const router = AdminJSExpress.buildRouter(admin);
+  app.use(admin.options.rootPath, router);
+  // end ADMINJS
+  app.use("/category", require("./routes/categories"));
+  app.use("/product", require("./routes/products"));
+  app.use("/users", require("./routes/users.routes"));
+  app.use("/emails", require("./routes/emails.routes.js"));
+  app.use("/pictures", require("./routes/pictures.routes"));
+  // end ADMINJS
+}
+const path = require("path");
 
-// replace this for your model
-// set up options -- models to use and a route to open dashboard
-const adminOptions = {
-  resources: [Categories, Products, Users],
-  rootPath: "/admin",
-};
-// initialize adminjs
-const admin = new AdminJS(adminOptions);
-// build admin route
-const router = AdminJSExpress.buildRouter(admin);
-app.use(admin.options.rootPath, router);
-// end ADMINJS
-app.use("/category", require("./routes/categories"));
-app.use("/product", require("./routes/products"));
-app.use("/users", require("./routes/users.routes"));
-app.use("/emails", require("./routes/emails.routes.js"));
-app.use("/pictures", require("./routes/pictures.routes"));
-// end ADMINJS
+app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, "../client/build")));
+
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+});
 
 app.listen(port, () => console.log(`Serv is running at ${port}`));
