@@ -20,6 +20,7 @@ import { URL } from "./config";
 import * as jose from "jose";
 import PaymentSuccess from "./pages/payment_success";
 import PaymentError from "./pages/payment_error";
+import { URL } from "../config.js";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -67,9 +68,7 @@ function App() {
   };
   const fetch_pictures = async (setter) => {
     try {
-      const response = await axios.get(
-        "http://localhost:5010/pictures/get_all"
-      );
+      const response = await axios.get(`${URL}/pictures/get_all`);
       // debugger;
       setter([...response.data.pictures]);
     } catch (error) {
