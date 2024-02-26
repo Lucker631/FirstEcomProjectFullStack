@@ -77,7 +77,7 @@ function App() {
 
   return (
     <div className="App">
-      <link
+      {/* <link
         href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet"
       ></link>
@@ -85,7 +85,7 @@ function App() {
       <link
         href="https://fonts.googleapis.com/css2?family=Courgette&family=Pacifico&display=swap"
         rel="stylesheet"
-      ></link>
+      ></link> */}
 
       <Router>
         <Navbar
