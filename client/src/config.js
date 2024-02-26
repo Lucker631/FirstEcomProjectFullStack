@@ -1,3 +1,3 @@
-const URL = `http://localhost:5010`;
+const URL = `https://yellow-jackrabbit-cape.cyclic.app`;
 
 export { URL };
