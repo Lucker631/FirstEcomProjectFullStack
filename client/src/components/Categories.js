@@ -24,6 +24,7 @@ function Categories() {
   };
 
   const fetchProductsByCategory = async (category) => {
+    // debugger;
     try {
       const productsResponse = await axios.post(
         "http://localhost:5010/product/products",
