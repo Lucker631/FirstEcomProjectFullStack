@@ -82,14 +82,15 @@ if (NODE_ENV === "dev") {
   // build admin route
   const router = AdminJSExpress.buildRouter(admin);
   app.use(admin.options.rootPath, router);
-  // end ADMINJS
-  app.use("/category", require("./routes/categories"));
-  app.use("/product", require("./routes/products"));
-  app.use("/users", require("./routes/users.routes"));
-  app.use("/emails", require("./routes/emails.routes.js"));
-  app.use("/pictures", require("./routes/pictures.routes"));
-  // end ADMINJS
 }
+// end ADMINJS
+app.use("/category", require("./routes/categories"));
+app.use("/product", require("./routes/products"));
+app.use("/users", require("./routes/users.routes"));
+app.use("/emails", require("./routes/emails.routes.js"));
+app.use("/pictures", require("./routes/pictures.routes"));
+// end ADMINJS
+
 const path = require("path");
 
 app.use(express.static(__dirname));
